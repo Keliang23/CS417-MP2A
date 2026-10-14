@@ -6,8 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Farm.unity
+    guid: 0d7ad0511edfda84ea6a3643f0904892
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 58010fc89d4115f499d5b35a56095e7b, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: ddcaf25475c3df847ae64e87b4ae9582, type: 2}
