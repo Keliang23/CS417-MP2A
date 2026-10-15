@@ -146,3 +146,17 @@ The saved scene contains `playerRig/cameraOffset/mainCamera/playerHud`, a world-
 The HUD immediately shows crops, seeds, coins, fertilizer, stones and all four kit inventories from the existing FarmResources event. Every 0.2 seconds it displays ready crops, dry crops, crops below 50 health, empty sprinkler tanks, and a zero-seed reminder. Looking at a plot within 6 metres reveals its water, growth, crop health, fertilizer/harvest status and soil tier, or a sprinkler's tier and remaining/capacity water. The UI reads existing gameplay state; it does not add player health or a new clock. The market and workshop displays remain available at their stations.
 
 HUD validation: 21 Play Mode checks passed for inventory events, gaze inspection, drought/health/maturity summaries, harvest reset, sprinkler refill, no-seed reminders, re-enable refresh and camera following; the rendered preview was inspected. The 27 crop-health/death/replant checks also passed after adding the read-only FarmCell state accessors. Final headset text comfort remains to be checked in VR.
+
+## Contextual controller prompts
+
+Like MP1B's floating item prompts, authored world-space panels appear while an XR interactor hovers over or selects an object. Nine tools show Hold GRIP (side) to grab; held tools show their specific contact action and Release GRIP to drop. The watering can instead explicitly instructs Hold TRIGGER (index) to pour at soil or a sprinkler tank. Market/workshop buttons show Press GRIP to trade/buy. Mature crops and loose stones inherit harvest/collect prompts from their prefabs; immature crops do not show harvest prompts.
+
+Each target contains editable `interactionPrompt/promptText` children and an `InteractionPrompt` component. Messages and height are Inspector fields. Panels face the player, retain readable scale when tools rotate, and have no colliders or UI raycast targets. They hide when neither hovered nor held. Camera lookup happens once at startup because runtime-spawned prefabs cannot hold a scene-camera reference. No new input bindings or gameplay rules were introduced. These are repeatable contextual control hints; they are not separately claimed as first-encounter-only tutorials.
+
+Validation: 47 Play Mode checks passed for authored references, hidden initial state, nonblocking UI, hover/exit, held-tool instructions, facing/scale, release, market transactions, crop maturity/harvest and spawned fragment prompts. A rendered held-watering-can preview was visually inspected. Final headset readability should be checked at normal hand distance.
+
+## Smooth player turning
+
+The owned playerRig variant now enables smooth turn actions, disables the snap-turn provider and disables turn-around. `LinearTurnProvider` extends the existing XRI continuous-turn provider so yaw depends only on the right stick's horizontal value: input.x * turnSpeed * deltaTime. Vertical stick input never causes a 180-degree turn or changes the horizontal turn rate. The left turn input is unused; left-stick movement remains unchanged. The default maximum speed is 60 degrees/second, editable in the rig's Linear Turn Provider component. Existing input deadzones still apply.
+
+Validation: 14 Play Mode checks passed, including saved action/mediator references, disabled snap turning, half/full input proportionality, diagonal and vertical input, actual rig rotation over time, and stopping after release. No third-party Starter Assets were edited. Headset comfort can be tuned using Turn Speed.
